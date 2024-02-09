@@ -1,0 +1,64 @@
+===============================
+Infinite-Crafter-API-Wrapper
+===============================
+
+Infinite-Crafter-API-Wrapper project is designed to manage, store, and retrieve elements with unique properties and interactions. It supports JSON and SQLite storage mechanisms and provides a foundation for requesting and caching element data.
+
+Overview
+--------
+
+This project includes:
+
+- An ``Element`` class that encapsulates the properties of an element, including its result, emoji representation, and newness status.
+- Abstract and concrete storage classes for persisting elements in JSON files and SQLite databases.
+- A requester system for fetching element data, with a focus on extendibility towards asynchronous request handling.
+
+Requirements
+------------
+
+- Python 3.11 or higher
+- jsonpickle
+- sqlite3 (included with Python standard library)
+- aiohttp (for asynchronous request handling, optional)
+
+Installation
+------------
+
+To set up the project environment:
+
+.. code-block:: bash
+
+    $ pip install jsonpickle aiohttp
+
+Usage
+-----
+
+1. Initialize your storage:
+
+.. code-block:: python
+
+    from storage import JSONStorage, SQLiteStorage
+
+    json_storage = JSONStorage('path/to/your/file.json')
+    sqlite_storage = SQLiteStorage('path/to/your/database.db')
+
+2. Create and store elements:
+
+.. code-block:: python
+
+    from element import Element
+
+    element = Element({"result": "Water", "emoji": "💧", "isNew": "True"})
+    json_storage.store(element)
+    sqlite_storage.store(element)
+
+3. Load and save elements from/to storage:
+
+.. code-block:: python
+
+    json_storage.load()
+    sqlite_storage.load()
+
+    json_storage.save()
+    sqlite_storage.save()
+
